@@ -1,0 +1,73 @@
+autoinstall:
+  version: 1
+  identity:
+    hostname: ubuntu-desktop
+    username: hbxadmin
+    # generate a SHA512-based encrypted password: $ openssl passwd -6
+    password: "$6$WlZrqQ4ckDU4vVd3$US/d.tFkWmxp/FZtK6pE/xZjqHCGj5XIHq/UP75euO4AcsszvQMncji3olMHyMmHQldreeP8ohqTmxPQQBSJU."
+  #storage:
+   # layout:
+    #  name: lvm
+  #snaps:
+    #- name: spotify
+    #  classic: false
+    #- name: telegram-desktop
+    #  classic: false
+    #- name: obsidian
+    #  classic: true
+    #- name: code
+     # classic: true
+  packages:
+    - vim
+    - nano
+  late-commands:
+   # - curtin in-target -- wget https://repo2.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3-3_all.deb
+   # - curtin in-target -- dpkg -i ./protonvpn-stable-release_1.0.3-3_all.deb
+   # - curtin in-target -- apt update
+   # - curtin in-target -- apt install -y proton-vpn-gnome-desktop
+ # Install Edge: Install Essential Packages: Install necessary packages for Microsoft Edge setup:
+#apt install curl gpg
+- curtin in-target -- wget -O /root/software/microsoft-edge-stable_123.0.2420.81-1_amd64.deb "https://sharesfiles.blob.core.windows.net/sharefiles/microsoft-edge-stable_123.0.2420.81-1_amd64.deb?sp=r&st=2024-04-10T20:36:50Z&se=2025-05-15T04:36:50Z&spr=https&sv=2022-11-02&sr=b&sig=3pYQK3qlBrJSlibq5UZnpe16IWgCWd0vCWN%2F0F7cjzY%3D"
+- curtin in-target -- dpkg -i /root/software/microsoft-edge-stable_123.0.2420.81-1_amd64.deb
+- curtin in-target -- apt-get update
+- curtin in-target -- apt install microsoft-edge-stable
+
+# Install Chrome:
+- curtin in-target -- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+- curtin in-target -- dpkg -i google-chrome-stable_current_amd64.deb
+- curtin in-target -- apt --fix-broken install
+
+# Install Company Portal
+- curtin in-target -- wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+- curtin in-target -- install -o root -g root -m 644 microsoft.gpg /usr/share/keyrings/ 
+- curtin in-target -- sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/ubuntu/22.04/prod jammy main" > /etc/apt/sources.list.d/microsoft-ubuntu-jammy-prod.list' 
+- curtin in-target -- rm microsoft.gpg
+ 
+# Install the Microsoft Intune app
+- curtin in-target -- apt-get update
+- curtin in-target -- apt-get -fy install intune-portal
+- curtin in-target -- update-grub
+
+#Install the TeamViewer App
+- curtin in-target -- wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+- curtin in-target -- apt update
+- curtin in-target -- apt -y install ./teamviewer_amd64.deb
+ 
+# Install Crowdstrike
+# Download the CrowdStrike Falcon Sensor package
+- curtin in-target -- wget -O /root/software/falcon-sensor_7.19.0-17219_amd64.deb "https://sharesfiles.blob.core.windows.net/sharefiles/falcon-sensor_7.19.0-17219_amd64.deb?sp=r&st=2025-01-22T17:43:08Z&se=2026-02-01T01:43:08Z&spr=https&sv=2022-11-02&sr=b&sig=JhxXi3TInzspgF4UgP1DHAX12sGhUTAbAlx0OMG%2F%2FKI%3D"
+# Install the package
+- curtin in-target -- dpkg -i /root/software/falcon-sensor_7.11.0-16407_amd64.deb
+# After installing, run this falconctl command to remove the host's agent ID:
+- curtin in-target -- /opt/CrowdStrike/falconctl -d -f --aid
+# Set your CID on the sensor and assing Tags
+- curtin in-target -- /opt/CrowdStrike/falconctl -s --cid=9698B431537C41C790312F0739D4A257-19 --tags="EndpointHB"
+ 
+# Install Forticlient
+#Prerequisites
+- curtin in-target -- apt-get -fy install libappindicator1 libgconf-2-4 libnss3-tools
+# Download the Forticlient package
+- curtin in-target -- wget -O /root/software/forticlient_vpn_7.2.4.0809_amd64.deb "https://sharesfiles.blob.core.windows.net/sharefiles/forticlient_vpn_7.2.4.0809_amd64.deb?sp=r&st=2024-04-09T08:58:34Z&se=2025-04-10T16:58:34Z&spr=https&sv=2022-11-02&sr=b&sig=8Jamcr1tez6U%2FFL8N4fTo1YgYXCz0QR%2B7I1U8F8dkDw%3D"
+# Install the package
+- curtin in-target -- dpkg -i /root/software/forticlient_vpn_7.2.4.0809_amd64.deb
+- curtin in-target -- apt -fy install
