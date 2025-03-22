@@ -5,28 +5,24 @@ autoinstall:
     username: hbxadmin
     # generate a SHA512-based encrypted password: $ openssl passwd -6
     password: "$6$WlZrqQ4ckDU4vVd3$US/d.tFkWmxp/FZtK6pE/xZjqHCGj5XIHq/UP75euO4AcsszvQMncji3olMHyMmHQldreeP8ohqTmxPQQBSJU."
-  #storage:
-   # layout:
-    #  name: lvm
-  #snaps:
-    #- name: spotify
-    #  classic: false
-    #- name: telegram-desktop
-    #  classic: false
-    #- name: obsidian
-    #  classic: true
-    #- name: code
-     # classic: true
+   storage:
+    layout:
+    name: lvm
+  snaps:
+    - name: spotify
+      classic: false
+    - name: telegram-desktop
+      classic: false
+    - name: obsidian
+      classic: true
+    - name: code
+      classic: true
   packages:
     - vim
-    - nano
+    
   late-commands:
-   # - curtin in-target -- wget https://repo2.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3-3_all.deb
-   # - curtin in-target -- dpkg -i ./protonvpn-stable-release_1.0.3-3_all.deb
-   # - curtin in-target -- apt update
-   # - curtin in-target -- apt install -y proton-vpn-gnome-desktop
  # Install Edge: Install Essential Packages: Install necessary packages for Microsoft Edge setup:
-#apt install curl gpg
+# apt install curl gpg
 - curtin in-target -- wget -O /root/software/microsoft-edge-stable_123.0.2420.81-1_amd64.deb "https://sharesfiles.blob.core.windows.net/sharefiles/microsoft-edge-stable_123.0.2420.81-1_amd64.deb?sp=r&st=2024-04-10T20:36:50Z&se=2025-05-15T04:36:50Z&spr=https&sv=2022-11-02&sr=b&sig=3pYQK3qlBrJSlibq5UZnpe16IWgCWd0vCWN%2F0F7cjzY%3D"
 - curtin in-target -- dpkg -i /root/software/microsoft-edge-stable_123.0.2420.81-1_amd64.deb
 - curtin in-target -- apt-get update
