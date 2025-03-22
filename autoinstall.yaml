@@ -18,8 +18,7 @@ autoinstall:
     - name: code
       classic: true
   packages:
-    - vim
-    
+    - vim    
   late-commands:
  # Install Edge: Install Essential Packages: Install necessary packages for Microsoft Edge setup:
 # apt install curl gpg
