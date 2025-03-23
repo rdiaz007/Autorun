@@ -4,11 +4,11 @@
 set -x
 
 # Ensure proper logging
-#if [ "$1" != "stage2" ]; then
-#  sudo mkdir /root/log
-#  /bin/bash /root/desktop-bootstrap.sh 'stage2' &> /root/log/desktop-bootstrap.log
-#  exit
-#fi
+if [ "$1" != "stage2" ]; then
+  sudo mkdir /root/log
+  /bin/bash /root/desktop-bootstrap.sh 'stage2' &> /root/log/desktop-bootstrap.log
+  exit
+fi
 
 ###### PACKAGE MANAGEMENT & ADDITIONAL PACKAGES ######
 ######################################################
