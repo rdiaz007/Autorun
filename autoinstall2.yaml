@@ -7,7 +7,7 @@ kernel:
  #  kernel:
      flavor: generic
      
-#autoinstall:
+autoinstall:
   version: 1
   identity:
     hostname: ubuntu-desktop
