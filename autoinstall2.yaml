@@ -10,6 +10,7 @@ autoinstall:
   storage:
     layout:
       name: lvm
+      sizing-policy: all
       password: Hola123!
   #snaps:
    # - name: spotify
