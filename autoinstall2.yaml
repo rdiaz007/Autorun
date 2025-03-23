@@ -1,11 +1,11 @@
-autoinstall:
-kernel:
-     package: linux-image-6.8.0-55-generic
+#autoinstall:
+#kernel:
+ #    package: linux-image-6.8.0-55-generic
 
 #autoinstall:
    # Install a particular kernel flavour.
  #  kernel:
-     flavor: generic
+  #   flavor: generic
      
 autoinstall:
   version: 1
