@@ -55,10 +55,10 @@ sudo wget -O /root/software/falcon-sensor_7.19.0-17219_amd64.deb "https://shares
 # Install the package
 sudo dpkg -i /root/software/falcon-sensor_7.19.0-17219_amd64.deb
 # After installing, run this falconctl command to remove the host's agent ID:
-/opt/CrowdStrike/falconctl -d -f --aid
+sudo /opt/CrowdStrike/falconctl -d -f --aid
 # Set your CID on the sensor and assing Tags
-/opt/CrowdStrike/falconctl -s --cid=9698B431537C41C790312F0739D4A257-19 --tags="EndpointHB"
-
+sudo /opt/CrowdStrike/falconctl -s --cid=9698B431537C41C790312F0739D4A257-19 --tags="EndpointHB"
+sudo update-grub
 # Install Forticlient
 #Prerequisites
 # Downloading packages
